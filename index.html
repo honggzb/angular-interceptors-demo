@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Angular Interceptors DEMO</title>
+  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/toastr/build/toastr.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/nprogress/nprogress.css">
+</head>
+<body ng-app="app">
+<div class="container" ng-controller="CodingController" ng-init="load()">
+  <div class="page-header">
+    <h1>Angular Interceptors DEMO</h1>
+  </div>
+  <sector>
+    <button class="btn btn-primary" ng-disabled="isLoading" ng-click="load()">刷新</button>
+    <span ng-show="isLoading">loading</span>
+    <ul>
+      <!-- <li ng-repeat="l in list">
+        <span ng-bind="l.owner_user_home"></span>
+           - 
+        <a href="{{l.http_url}}" target="{{l.name}}">{{l.name}}</a>
+      </li> -->
+      <li ng-repeat="p in list">
+        <span ng-bind="p.member.username"></span>
+        <a href="{{p.url}}" target="window-{{p.id}}">{{p.title}}</a>
+        <span> at {{p.node.title}}</span>
+        <span> {{p.replies}} 回复</span>
+      </li>
+    </ul>
+  </sector>
+  <section>
+    <h4>相关资料</h4>
+    <ul>
+      <li>
+        <span>文章：</span>
+        <a href="http://chensd.com/2016-03/Angular-Handle-Global-Http-Error-with-Interceptors.html">AngularJS 中利用 Interceptors 来统一处理 HTTP 的错误</a>
+      </li>
+      <li>
+        <a href="https://github.com/stiekel/angular-interceptors-demo">Github 代码库</a>
+      </li>
+      <li>
+        <a href="https://coding.net/u/Stiekel/p/angular-interceptors-demo/git">Coding.NET 代码库</a>
+      </li>
+    </ul>
+  </section>
+</div>
+<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="node_modules/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="node_modules/toastr/build/toastr.min.js"></script>
+<script type="text/javascript" src="node_modules/nprogress/nprogress.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
