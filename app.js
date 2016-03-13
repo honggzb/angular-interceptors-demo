@@ -4,8 +4,8 @@ app.config(['$httpProvider', function($httpProvider){
   $httpProvider.interceptors.push(HttpInterceptor);
 }]);
 
-app.factory('HttpInterceptor', ['$q', HttpInterceptor]);
-function HttpInterceptor($q) {
+app.factory('HttpInterceptor', ['$q', '$timeout', HttpInterceptor]);
+function HttpInterceptor($q, $timeout) {
   toastr.options = {
     "closeButton": false,
     "debug": false,
@@ -23,19 +23,24 @@ function HttpInterceptor($q) {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   };
+  var defered = $q.defer();
   return {
     request: function(config){
+      NProgress.start();
       return config;
     },
     requestError: function(err){
       toastr["error"]("请检查您的网络连接情况", "请求发送失败");
+      NProgress.start();
       return $q.reject(err);
     },
     response: function(res){
+      NProgress.done();
       toastr["success"]("获取列表成功", "完成");
       return $q.resolve(res);
     },
     responseError: function(err){
+      NProgress.done();
       if(-1 === err.status) {
         toastr["error"]("远程服务器无响应", "失败");
       } else if(404 === err.status) {
@@ -61,14 +66,12 @@ function CodingController($scope, $resource, $timeout){
       $scope.isLoading = true;
     }
     $scope.list = [];
-    $timeout(function(){
-      r[ Math.floor( Math.random()*2 )]
-      .query(function(data){
-        $scope.list = data;
-        $scope.isLoading = false;
-      }, function(err){
-        $scope.isLoading = false;
-      });
-    }, Math.random() * 2000);
+    r[ Math.floor( Math.random()*2 )]
+    .query(function(data){
+      $scope.list = data;
+      $scope.isLoading = false;
+    }, function(err){
+      $scope.isLoading = false;
+    });
   };
 }
