@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/toastr/build/toastr.css">>
+</head>
+<body ng-app="app">
+<div class="container" ng-controller="CodingController" ng-init="load()">
+  <div class="page-header">
+    <h1>Angular Interceptors DEMO</h1>
+  </div>
+  <sector>
+    <button class="btn btn-primary" ng-disabled="isLoading" ng-click="load()">重新</button>
+    <span ng-show="isLoading">loading</span>
+    <ul>
+      <!-- <li ng-repeat="l in list">
+        <span ng-bind="l.owner_user_home"></span>
+           - 
+        <a href="{{l.http_url}}" target="{{l.name}}">{{l.name}}</a>
+      </li> -->
+      <li ng-repeat="p in list">
+        <span ng-bind="p.member.username"></span>
+        <a href="{{p.url}}" target="window-{{p.id}}">{{p.title}}</a>
+        <span> at {{p.node.title}}</span>
+        <span> {{p.replies}} 回复</span>
+      </li>
+    </ul>
+  </sector>
+</div>
+<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="node_modules/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="node_modules/toastr/build/toastr.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
